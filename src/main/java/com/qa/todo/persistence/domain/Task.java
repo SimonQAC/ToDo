@@ -1,13 +1,15 @@
 package com.qa.todo.persistence.domain;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.ManyToOne;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Size;
-
-import org.springframework.data.annotation.Id;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -24,19 +26,21 @@ import lombok.ToString;
 @Setter(AccessLevel.PUBLIC)
 @ToString
 @EqualsAndHashCode
-public class Users {
-
+public class Task {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name="username", unique=true)
-	@Size(min=1, max=30)
-	private String name;
+	@Column(name="taskName", unique=true)
+	@Size(min=1, max=300)
+	private String taskName;
 	
-	@Column(name="timezone")
-	private String timezone;
-	
-	@ManyToOne
-	private Task task;
+	@OneToMany(mappedBy = "task", cascade = CascadeType.ALL)
+	private List<Users> users;
+
+	public Task(String taskName) {
+		super();
+		this.taskName = taskName;
+	}
 }
