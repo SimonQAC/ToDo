@@ -15,10 +15,9 @@ import lombok.ToString;
 @Setter(AccessLevel.PUBLIC)
 @ToString
 @EqualsAndHashCode
-public class UserDTO{
+public class TaskDTO{
 	
 		private Long id;
 		private String name;
-		private String timezone;
 		
 	}
