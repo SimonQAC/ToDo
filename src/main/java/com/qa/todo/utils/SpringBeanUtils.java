@@ -4,9 +4,11 @@ import java.beans.PropertyDescriptor;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.BeanWrapper;
 import org.springframework.beans.BeanWrapperImpl;
+import org.springframework.context.annotation.Bean;
 
 import lombok.NoArgsConstructor;
 
@@ -27,4 +29,10 @@ public class SpringBeanUtils {
 		}
 		return propertyNames.toArray(new String[propertyNames.size()]);
 	}
+	
+	   @Bean
+	   public ModelMapper modelMapper() {
+	      ModelMapper modelMapper = new ModelMapper();
+	      return modelMapper;
+	   }
 }
