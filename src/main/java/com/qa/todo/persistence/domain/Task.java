@@ -37,7 +37,7 @@ public class Task {
 	private String taskName;
 	
 	@OneToMany(mappedBy = "task", cascade = CascadeType.ALL)
-	private List<Users> users;
+	private List<User> users;
 
 	public Task(String taskName) {
 		super();

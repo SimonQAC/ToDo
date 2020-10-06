@@ -7,7 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.Size;
 
-import org.springframework.data.annotation.Id;
+import javax.persistence.Id;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -24,7 +24,7 @@ import lombok.ToString;
 @Setter(AccessLevel.PUBLIC)
 @ToString
 @EqualsAndHashCode
-public class Users {
+public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -39,4 +39,10 @@ public class Users {
 	
 	@ManyToOne
 	private Task task;
+	
+    public User(String name, String timezone) {
+        this.name = name;
+        this.timezone = timezone;
+    }
+	
 }
