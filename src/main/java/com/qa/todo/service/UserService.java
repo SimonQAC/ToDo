@@ -1,6 +1,7 @@
 package com.qa.todo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public class UserService {
 
 	private UserRepository repo;
 	private ModelMapper mapper;
-
+	
 	@Autowired
 	public UserService (UserRepository repo, ModelMapper mapper) {
 		super();
