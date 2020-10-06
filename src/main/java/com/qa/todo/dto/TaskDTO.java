@@ -1,5 +1,7 @@
 package com.qa.todo.dto;
 
+import java.util.List;
+
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -19,5 +21,6 @@ public class TaskDTO{
 	
 		private Long id;
 		private String name;
+		private List<UserDTO> users;
 		
 	}
