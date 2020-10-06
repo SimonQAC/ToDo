@@ -39,4 +39,10 @@ public class User {
 	
 	@ManyToOne
 	private Task task;
+	
+    public User(String name, String timezone) {
+        this.name = name;
+        this.timezone = timezone;
+    }
+	
 }
