@@ -42,6 +42,26 @@ document.querySelector("form.userRecord").addEventListener("submit",function(sto
     console.log(timezone);
     updateUser(id,name,timezone);
 })
+document.getElementById("Delete").addEventListener("click",function(stop){
+    stop.preventDefault();
+    // console.log('deletetest')
+    let formElements = document.querySelector("form.userRecord").elements;
+    let id = formElements["id"].value;
+    fetch("http://localhost:8082/user/delete/"+id, {
+        method: 'delete',
+        headers: {
+            "Content-type": "application/json"
+        },
+      })
+      .then(res => res.json())
+      .then(function (data) {
+        console.log('Request succeeded with JSON response', data);
+      })
+      .catch(function (error) {
+        console.log('Request failed', error);
+      });
+
+})
 
 function updateUser(id,name,timezone){
     let updateId = parseInt(id);

@@ -1,5 +1,7 @@
 package com.qa.todo.dto;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
+
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
