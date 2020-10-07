@@ -35,10 +35,14 @@ fetch('http://localhost:8082/user/readall')
           th.appendChild(text);
           row.appendChild(th);
       }
-      let th2 = document.createElement("th");
-      let text2 = document.createTextNode("Edit");
-      th2.appendChild(text2);
-      row.appendChild(th2);
+      let editHead = document.createElement("th");
+      let editButtonTitle = document.createTextNode("Edit");
+      editHead.appendChild(editButtonTitle);
+      row.appendChild(editHead);
+      let deleteHead = document.createElement("th");
+      let deleteButtonTitle = document.createTextNode("Delete");
+      deleteHead.appendChild(deleteButtonTitle);
+      row.appendChild(deleteHead);
   }
 
   function createTableBody(table,dataData){
@@ -50,11 +54,27 @@ fetch('http://localhost:8082/user/readall')
               let text = document.createTextNode(dataRecord[values]);
               cell.appendChild(text);
           }
-          let newCell = row.insertCell();
-          let viewButton = document.createElement("a");
-          viewButton.className="btn btn-primary";
-          viewButton.href="userRecord.html?id="+dataRecord.id;
-          viewButton.innerHTML="View";
-          newCell.appendChild(viewButton);
+          let editCell = row.insertCell();
+          let editButton = document.createElement("a");
+          editButton.className="btn btn-primary";
+          editButton.href="userRecord.html?id="+dataRecord.id;
+          editButton.innerHTML="Edit";
+          editCell.appendChild(editButton);
+
+          let deleteCell = row.insertCell();
+          let deleteButton = document.createElement("a");
+          deleteButton.className="btn btn-danger";
+          // deleteButton.href="userDelete.html?id="+dataRecord.id;
+          deleteButton.innerHTML="Delete";
+          deleteCell.appendChild(deleteButton);
+
+          deleteButton.onclick = function(){
+            delUser(userRecord.id);return false;
+          }
+          
       }
+  }
+
+  function delUser(id){
+      console.log("deltest");
   }
