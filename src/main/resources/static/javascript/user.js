@@ -39,10 +39,7 @@ fetch('http://localhost:8082/user/readall')
       let editButtonTitle = document.createTextNode("Edit");
       editHead.appendChild(editButtonTitle);
       row.appendChild(editHead);
-      // let deleteHead = document.createElement("th");
-      // let deleteButtonTitle = document.createTextNode("Delete");
-      // deleteHead.appendChild(deleteButtonTitle);
-      // row.appendChild(deleteHead);
+
   }
 
   function createTableBody(table,dataData){
@@ -61,20 +58,6 @@ fetch('http://localhost:8082/user/readall')
           editButton.innerHTML="Edit";
           editCell.appendChild(editButton);
 
-          // let deleteCell = row.insertCell();
-          // let deleteButton = document.createElement("a");
-          // deleteButton.className="btn btn-danger";
-          // // deleteButton.href="userDelete.html?id="+dataRecord.id;
-          // deleteButton.innerHTML="Delete";
-          // deleteCell.appendChild(deleteButton);
-
-          // deleteButton.onclick = function(){
-          //   delUser(userRecord.id);return false;
-          // }
-          
-      }
+                }
   }
 
-  // function delUser(id){
-  //     console.log("deltest");
-  // }
