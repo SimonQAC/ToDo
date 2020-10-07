@@ -11,14 +11,6 @@ fetch('http://localhost:8082/user/readall')
       response.json().then(function(dataData) {
         console.log(dataData);
 
-        // for (let a of dataData){
-        //   console.log("a",a);
-
-        //   for (let b in a){
-        //     console.log("b",a[b]);
-        //   }
-        // }
-
         let table = document.querySelector("table");
         let data = Object.keys(dataData[0]);
 
@@ -56,13 +48,8 @@ fetch('http://localhost:8082/user/readall')
           for (value in dataRecord){
             let cell = row.insertCell();
             let text = document.createTextNode(dataRecord[value]);
-            // console.log(typeof(dataRecord[value]));
-            // console.log(dataRecord[value]);
             if (typeof dataRecord[value] === 'object'){
-              // console.log("arrayhomie");
               for (object in dataRecord[value]){
-                // console.log(dataRecord[value][object].name);
-                
                 let taskText = document.createTextNode(dataRecord[value][object].name);
                 cell.appendChild(taskText);
 
@@ -70,13 +57,10 @@ fetch('http://localhost:8082/user/readall')
                   let comma = document.createTextNode(", ");
                   cell.appendChild(comma);
                 }
-
-                
               }
             } else{
               cell.appendChild(text);
             }
-              // console.log(dataRecord[value]);
           }
           let editCell = row.insertCell();
           let editButton = document.createElement("a");
