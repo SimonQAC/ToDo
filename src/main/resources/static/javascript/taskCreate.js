@@ -1,15 +1,13 @@
-document.querySelector("form.userRecord").addEventListener("submit",function(stop){
+document.querySelector("form.taskRecord").addEventListener("submit",function(stop){
     stop.preventDefault();
-    let formElements = document.querySelector("form.userRecord").elements;
+    let formElements = document.querySelector("form.taskRecord").elements;
     let name = formElements["name"].value;
-    let timezone = formElements["timezone"].value;
     console.log(name);
-    console.log(timezone);
-    createUser(name,timezone);
+    createTask(name);
 })
 
 
-function createUser(name,timezone){
+function createTask(name){
 
     fetch("http://localhost:8082/task/create/", {
         method: 'post',
@@ -17,8 +15,7 @@ function createUser(name,timezone){
           "Content-type": "application/json"
         },
         body: json = JSON.stringify({
-            "name": name,
-            "timezone": timezone,
+            "taskName": name,
           })
       })
       .then(res => res.json())
