@@ -10,6 +10,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -35,8 +37,9 @@ public class Task {
 	@Size(min=1, max=300)
 	private String taskName;
 	
-	@ManyToOne(fetch=FetchType.EAGER)
-	@JoinColumn(name = "USER_ID")
+	@JsonIgnoreProperties("task")
+	@ManyToOne
+	@JoinColumn(name = "user_id")
 	private User user;
 
 	public Task(String taskName) {

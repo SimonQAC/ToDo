@@ -1,6 +1,6 @@
 package com.qa.todo.dto;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
+import java.util.List;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -22,5 +22,6 @@ public class UserDTO{
 		private Long id;
 		private String name;
 		private String timezone;
+		private List<TaskDTO> tasks;
 		
 	}
