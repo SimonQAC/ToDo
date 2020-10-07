@@ -1,10 +1,14 @@
 package com.qa.todo.persistence.domain;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.Size;
 
 import javax.persistence.Id;
@@ -37,8 +41,8 @@ public class User {
 	@Column(name="timezone")
 	private String timezone;
 	
-	@ManyToOne
-	private Task task;
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+	private List<Task> tasks = new ArrayList<>();
 	
     public User(String name, String timezone) {
         this.name = name;
