@@ -33,5 +33,35 @@ fetch('http://localhost:8082/user/read/'+id)
 document.querySelector("form.userRecord").addEventListener("submit",function(stop){
     stop.preventDefault();
     let formElements = document.querySelector("form.userRecord").elements;
-    console.log(formElements);
+    // console.log(formElements);
+    let id = formElements["id"].value;
+    let name = formElements["name"].value;
+    let timezone = formElements["timezone"].value;
+    console.log(id);
+    console.log(name);
+    console.log(timezone);
+    updateUser(id,name,timezone);
 })
+
+function updateUser(id,name,timezone){
+    let updateId = parseInt(id);
+
+    fetch("http://localhost:8082/user/update/"+id, {
+        method: 'put',
+        headers: {
+          "Content-type": "application/json"
+        },
+        body: json = JSON.stringify({
+            "id": updateId,
+            "name": name,
+            "timezone": timezone,
+          })
+      })
+      .then(res => res.json())
+      .then(function (data) {
+        console.log('Request succeeded with JSON response', data);
+      })
+      .catch(function (error) {
+        console.log('Request failed', error);
+      });
+}
