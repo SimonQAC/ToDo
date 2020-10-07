@@ -2,12 +2,12 @@ document.querySelector("form.taskRecord").addEventListener("submit",function(sto
     stop.preventDefault();
     let formElements = document.querySelector("form.taskRecord").elements;
     let name = formElements["name"].value;
-    console.log(name);
-    createTask(name);
+    let userid = formElements["user_id"].value;
+    createTask(name,userid);
 })
 
 
-function createTask(name){
+function createTask(name,userid){
 
     fetch("http://localhost:8082/task/create/", {
         method: 'post',
@@ -16,6 +16,9 @@ function createTask(name){
         },
         body: json = JSON.stringify({
             "taskName": name,
+            "user": {
+                "id": userid
+            }
           })
       })
       .then(res => res.json())
@@ -28,3 +31,4 @@ function createTask(name){
         console.log('Request failed', error);
       });
 }
+
