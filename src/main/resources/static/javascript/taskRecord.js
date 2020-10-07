@@ -21,7 +21,6 @@ fetch('http://localhost:8082/task/read/'+id)
 
         document.getElementById("id").value=dataData.id;
         document.getElementById("name").value=dataData.name;
-        document.getElementById("timezone").value=dataData.timezone;
       });
     }
   )
@@ -30,17 +29,14 @@ fetch('http://localhost:8082/task/read/'+id)
   });
 }
 
-document.querySelector("form.userRecord").addEventListener("submit",function(stop){
+document.querySelector("form.taskRecord").addEventListener("submit",function(stop){
     stop.preventDefault();
-    let formElements = document.querySelector("form.userRecord").elements;
-    // console.log(formElements);
+    let formElements = document.querySelector("form.taskRecord").elements;
     let id = formElements["id"].value;
     let name = formElements["name"].value;
-    let timezone = formElements["timezone"].value;
     console.log(id);
     console.log(name);
-    console.log(timezone);
-    updateUser(id,name,timezone);
+    updatetask(id,name);
 })
 document.getElementById("Delete").addEventListener("click",function(stop){
     stop.preventDefault();
@@ -49,10 +45,9 @@ document.getElementById("Delete").addEventListener("click",function(stop){
         if (r == true) {
         confirm = "You pressed OK!";
 
-    // console.log('deletetest')
-    let formElements = document.querySelector("form.userRecord").elements;
+    let formElements = document.querySelector("form.taskRecord").elements;
     let id = formElements["id"].value;
-    fetch("http://localhost:8082/user/delete/"+id, {
+    fetch("http://localhost:8082/task/delete/"+id, {
         method: 'delete',
         headers: {
             "Content-type": "application/json"
@@ -70,10 +65,10 @@ document.getElementById("Delete").addEventListener("click",function(stop){
 }
 })
 
-function updateUser(id,name,timezone){
+function updatetask(id,name){
     let updateId = parseInt(id);
 
-    fetch("http://localhost:8082/user/update/"+id, {
+    fetch("http://localhost:8082/task/update/"+id, {
         method: 'put',
         headers: {
           "Content-type": "application/json"
@@ -81,7 +76,6 @@ function updateUser(id,name,timezone){
         body: json = JSON.stringify({
             "id": updateId,
             "name": name,
-            "timezone": timezone,
           })
       })
       .then(res => res.json())
