@@ -44,6 +44,11 @@ document.querySelector("form.userRecord").addEventListener("submit",function(sto
 })
 document.getElementById("Delete").addEventListener("click",function(stop){
     stop.preventDefault();
+    let confirm;
+        let r = window.confirm("Are you sure you wish to delete record?");
+        if (r == true) {
+        confirm = "You pressed OK!";
+
     // console.log('deletetest')
     let formElements = document.querySelector("form.userRecord").elements;
     let id = formElements["id"].value;
@@ -60,7 +65,9 @@ document.getElementById("Delete").addEventListener("click",function(stop){
       .catch(function (error) {
         console.log('Request failed', error);
       });
-
+    } else {
+        confirm = "You pressed Cancel!";
+}
 })
 
 function updateUser(id,name,timezone){
