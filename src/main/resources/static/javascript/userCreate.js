@@ -24,6 +24,8 @@ function createUser(name,timezone){
       .then(res => res.json())
       .then(function (data) {
         console.log('Request succeeded with JSON response', data);
+        window.alert("User Successfully Created!");
+        document.getElementById("form").reset();
       })
       .catch(function (error) {
         console.log('Request failed', error);
