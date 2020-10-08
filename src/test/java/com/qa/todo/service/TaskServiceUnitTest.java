@@ -80,6 +80,20 @@ public class TaskServiceUnitTest {
 	
 	@Test
 	void updateTest() {
+		final Long id = 1L;
+		TaskDTO newTask = new TaskDTO(null, "test");
+		Task task = new Task(null, "test", null);
+		task.setId(id);
+		Task updatedTask = new Task(newTask.getName());
+		updatedTask.setId(id);
+		TaskDTO updatedDTO = new TaskDTO(id, updatedTask.getTaskName());
+		
+		when(this.repo.findById(this.id)).thenReturn(Optional.of(task));
+		when(this.repo.save(updatedTask)).thenReturn(updatedTask);
+		when(this.modelMapper.map(updatedTask, TaskDTO.class)).thenReturn(updatedDTO);
+		assertThat(updatedDTO).isEqualTo(this.service.update(newTask, this.id));
+		verify(this.repo,times(1)).findById(1L);
+		verify(this.repo, times(1)).save(updatedTask);
 		
 	}
 	
