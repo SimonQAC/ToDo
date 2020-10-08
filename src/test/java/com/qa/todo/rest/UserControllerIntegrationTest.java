@@ -86,6 +86,22 @@ public class UserControllerIntegrationTest {
     		.andExpect(content().json(this.objectMapper.writeValueAsString(userDTO)));
     }
     
+    @Test
+    void testUpdate() throws Exception{
+    	UserDTO newUser = new UserDTO(null, "Testificate","UTC",null);
+    	User updatedUser = new User(newUser.getName(),newUser.getTimezone());
+    	updatedUser.setId(this.id);
+    	
+    	String out = this.mock
+    			.perform(request(HttpMethod.PUT, "/user/update/"+this.id)
+    					.accept(MediaType.APPLICATION_JSON)
+    					.contentType(MediaType.APPLICATION_JSON)
+    					.content(this.objectMapper.writeValueAsString(newUser)))
+    			.andExpect(status().isAccepted()).andReturn().getResponse().getContentAsString();
+    	
+    	assertEquals(this.objectMapper.writeValueAsString(this.maptoDTO(updatedUser)), out);
+    }
+    
     
     
 }
