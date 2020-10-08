@@ -70,7 +70,7 @@ public class UserControllerIntegrationTest {
     }
     
     @Test 
-    void readAll() throws Exception{
+    void testReadAll() throws Exception{
     	List<UserDTO> users = new ArrayList<>();
     	users.add(this.userDTO);
     	String data =
@@ -78,5 +78,14 @@ public class UserControllerIntegrationTest {
     		.andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
     	assertEquals(this.objectMapper.writeValueAsString(users),data);
     }
+    
+    @Test 
+    void testRead() throws Exception{
+    	this.mock.perform(request(HttpMethod.GET,"/user/read/"+this.id).accept(MediaType.APPLICATION_JSON))
+    		.andExpect(status().isOk())
+    		.andExpect(content().json(this.objectMapper.writeValueAsString(userDTO)));
+    }
+    
+    
     
 }
