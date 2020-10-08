@@ -7,6 +7,8 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
@@ -53,14 +55,28 @@ public class TaskServiceUnitTest {
 	@Test
 	public void createTest() {
 		when(this.repo.save(testTask)).thenReturn(testTaskId);
-		
 		when(this.modelMapper.map(testTaskId, TaskDTO.class)).thenReturn(taskDTO);
-		
 		TaskDTO expected = this.taskDTO;
 		TaskDTO actual = this.service.create(testTask);
-		
 		assertThat(expected).isEqualTo(actual);
-		
 		verify(this.repo, times(1)).save(this.testTask);
 	}
+	
+	@Test
+	void readAllTest() {
+		when(repo.findAll()).thenReturn(this.tasks);
+		when(this.modelMapper.map(testTaskId, TaskDTO.class)).thenReturn(taskDTO);
+		assertThat(this.service.read().isEmpty()).isFalse();
+		verify(repo, times(1)).findAll();
+	}
+	
+	@Test
+	void readTest() {
+		when(this.repo.findById(id)).thenReturn(Optional.of(this.testTaskId));
+		when(this.modelMapper.map(testTaskId, TaskDTO.class)).thenReturn(taskDTO);
+		assertThat(this.taskDTO).isEqualTo(this.service.read(this.testTaskId.getId()));
+		
+	}
+	
+	
 }
