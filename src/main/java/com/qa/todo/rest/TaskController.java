@@ -2,6 +2,8 @@ package com.qa.todo.rest;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,10 +16,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import com.qa.todo.dto.TaskDTO;
 import com.qa.todo.persistence.domain.Task;
+import com.qa.todo.persistence.repo.TaskRepository;
 import com.qa.todo.service.TaskService;
 
 @RestController
@@ -52,9 +54,14 @@ public class TaskController {
     }
 	
     @PutMapping("/update/{id}")
-    public ResponseEntity<TaskDTO> update(@PathVariable Long id, @RequestBody TaskDTO taskDTO) {
+    public ResponseEntity<TaskDTO> update(@Valid @PathVariable Long id, @RequestBody TaskDTO taskDTO) {
         return new ResponseEntity<>(this.service.update(taskDTO, id), HttpStatus.ACCEPTED);
     }
+    
+//    @PutMapping("/update/{id}")
+//    public ResponseEntity<TaskDTO> updateUser(@Valid @PathVariable Long id, @RequestBody TaskDTO taskDTO) {
+//        return TaskRepository.save(taskDTO);
+//    }
     
 	@DeleteMapping("/delete/{id}")
 	public ResponseEntity<TaskDTO> delete(@PathVariable Long id){
