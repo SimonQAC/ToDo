@@ -55,6 +55,7 @@ public class TaskService {
 
 	public TaskDTO update(TaskDTO taskDTO, Long id) {
 		Task toUpdate = this.repo.findById(id).orElseThrow(TaskNotFoundException::new);
+		toUpdate.setTaskName(taskDTO.getName());
 		SpringBeanUtils.mergeObject(taskDTO, toUpdate);
 		return this.mapToDTO(this.repo.save(toUpdate));
 	}

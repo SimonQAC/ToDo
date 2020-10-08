@@ -37,9 +37,9 @@ public class Task {
 	@Size(min=1, max=300)
 	private String taskName;
 	
-	@JsonIgnoreProperties("task")
+//	@JsonIgnoreProperties("task")
 	@ManyToOne
-	@JoinColumn(name = "user_id")
+//	@JoinColumn(name = "user_id")
 	private User user;
 
 	public Task(String taskName) {
