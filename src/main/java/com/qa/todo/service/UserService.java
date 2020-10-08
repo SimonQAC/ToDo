@@ -59,9 +59,15 @@ public class UserService {
 		return this.mapToDTO(this.repo.save(toUpdate));
 	}
 	
-	public boolean delete(Long id) {
+	public Boolean delete(Long id) {
+
+		if(!this.repo.existsById(id)) {
+			throw new UserNotFoundException();
+		}
 		this.repo.deleteById(id);
-		return this.repo.existsById(id);
+		return !this.repo.existsById(id);
+//		this.repo.deleteById(id);
+//		return this.repo.existsById(id);
 	}
 	
 }

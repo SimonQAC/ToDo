@@ -102,6 +102,13 @@ public class UserControllerIntegrationTest {
     	assertEquals(this.objectMapper.writeValueAsString(this.maptoDTO(updatedUser)), out);
     }
     
+    @Test
+    void testDelete() throws Exception{
+    	this.mock
+    		.perform(request(HttpMethod.DELETE, "/user/delete/"+this.id))
+    		.andExpect(status().isNoContent());
+    }
+    
     
     
 }
