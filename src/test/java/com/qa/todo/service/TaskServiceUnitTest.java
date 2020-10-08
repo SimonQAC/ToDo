@@ -7,9 +7,8 @@ import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -29,33 +28,39 @@ public class TaskServiceUnitTest {
 	private TaskRepository repo;
 	
 	@MockBean
-	private ModelMapper mapper;
-	
+	private ModelMapper modelMapper;	
+		
 	private List<Task> tasks;
-	private TaskDTO taskDTO;
 	private Task testTask;
 	private Task testTaskId;
-
+	private TaskDTO taskDTO;
 	final Long id = 1L;
-	final String testTaskName = "Take over the world";
+	
+	private TaskDTO maptoDTO(Task task) {
+		return this.modelMapper.map(task, TaskDTO.class);
+	}
 	
 	@BeforeEach
 	void init() {
 		this.tasks = new ArrayList<>();
-		this.testTask = new Task(testTaskName);
-		this.tasks.add(testTask);
+		this.testTask = new Task("Become ruler of the world");
 		this.testTaskId = new Task(testTask.getTaskName());
 		this.testTaskId.setId(id);
-		this.taskDTO = mapper.map(testTaskId, TaskDTO.class);
+		this.tasks.add(testTaskId);
+		this.taskDTO = this.maptoDTO(testTaskId);
 	}
 	
 	@Test
 	public void createTest() {
-		when(this.repo.save(this.testTask)).thenReturn(this.testTaskId);
-		when(this.mapper.map(this.testTaskId, TaskDTO.class)).thenReturn(this.taskDTO);
+		when(this.repo.save(testTask)).thenReturn(testTaskId);
+		
+		when(this.modelMapper.map(testTaskId, TaskDTO.class)).thenReturn(taskDTO);
+		
 		TaskDTO expected = this.taskDTO;
-		TaskDTO actual = this.service.create(this.testTask);
+		TaskDTO actual = this.service.create(testTask);
+		
 		assertThat(expected).isEqualTo(actual);
-		verify(this.repo, times(1)).findById(this.id);
+		
+		verify(this.repo, times(1)).save(this.testTask);
 	}
 }
