@@ -23,6 +23,8 @@ import com.qa.todo.dto.UserDTO;
 import com.qa.todo.persistence.domain.User;
 import com.qa.todo.persistence.repo.UserRepository;
 
+import net.bytebuddy.asm.Advice.This;
+
 @SpringBootTest
 @AutoConfigureMockMvc
 public class UserControllerIntegrationTest {
@@ -66,4 +68,15 @@ public class UserControllerIntegrationTest {
     			.andExpect(status().isCreated())
     			.andExpect(content().json(this.objectMapper.writeValueAsString(userDTO)));
     }
+    
+    @Test 
+    void readAll() throws Exception{
+    	List<UserDTO> users = new ArrayList<>();
+    	users.add(this.userDTO);
+    	String data =
+    	this.mock.perform(request(HttpMethod.GET,"/user/readall").accept(MediaType.APPLICATION_JSON))
+    		.andExpect(status().isOk()).andReturn().getResponse().getContentAsString();
+    	assertEquals(this.objectMapper.writeValueAsString(users),data);
+    }
+    
 }
