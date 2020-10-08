@@ -78,5 +78,17 @@ public class TaskServiceUnitTest {
 		
 	}
 	
+	@Test
+	void updateTest() {
+		
+	}
+	
+	@Test
+	void deleteTest() {
+		when(this.repo.existsById(id)).thenReturn(true,false);
+		assertThat(this.service.delete(id)).isTrue();
+		verify(this.repo, times(1)).deleteById(id);
+		verify(this.repo,times(2)).existsById(id);
+	}
 	
 }
