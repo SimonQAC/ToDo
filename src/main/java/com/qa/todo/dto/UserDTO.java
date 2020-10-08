@@ -1,5 +1,7 @@
 package com.qa.todo.dto;
 
+import java.util.List;
+
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -20,5 +22,6 @@ public class UserDTO{
 		private Long id;
 		private String name;
 		private String timezone;
+		private List<TaskDTO> tasks;
 		
 	}
