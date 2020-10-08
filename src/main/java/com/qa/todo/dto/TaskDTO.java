@@ -1,9 +1,5 @@
 package com.qa.todo.dto;
 
-import java.util.List;
-
-import com.qa.todo.persistence.domain.User;
-
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
