@@ -1,7 +1,5 @@
 package com.qa.todo.selenium;
 
-import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.concurrent.TimeUnit;
@@ -9,12 +7,18 @@ import java.util.concurrent.TimeUnit;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.springframework.boot.test.context.SpringBootTest;
 
+import com.qa.todo.ToDoApplication;
+
+@SpringBootTest
+@RunWith(ToDoApplication.class)
 public class CreateTaskTest {
 
 	public static WebDriver driver;
@@ -26,6 +30,10 @@ public class CreateTaskTest {
 //		options.setHeadless(true);
 		driver = new ChromeDriver(options);
 		driver.manage().window().setSize(new Dimension(1280,720));
+	}
+	
+	public void delayer() {
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
 	@Test
@@ -47,7 +55,8 @@ public class CreateTaskTest {
 	    driver.findElement(By.id("timezone")).click();
 	    driver.findElement(By.id("timezone")).sendKeys("UTC");
 	    driver.findElement(By.cssSelector(".btn")).click();
-	    assertThat(driver.switchTo().alert().getText(), is("User Successfully Created!"));
+	    delayer();
+	    assertEquals(driver.switchTo().alert().getText(), ("User Successfully Created!"));
 	    driver.findElement(By.linkText("Task")).click();
 	    driver.findElement(By.linkText("Create")).click();
 	    driver.findElement(By.id("name")).click();
@@ -55,7 +64,8 @@ public class CreateTaskTest {
 	    driver.findElement(By.id("user_id")).click();
 	    driver.findElement(By.id("user_id")).sendKeys("1");
 	    driver.findElement(By.cssSelector(".btn")).click();
-	    assertThat(driver.switchTo().alert().getText(), is("User Successfully Created!"));
+	    delayer();
+	    assertEquals(driver.switchTo().alert().getText(), ("Task Successfully Created!"));
 	    driver.findElement(By.linkText("Task")).click();
 	    driver.findElement(By.linkText("User")).click();
 	}
