@@ -11,15 +11,17 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.qa.todo.ToDoApplication;
 
 @SpringBootTest
-@RunWith(ToDoApplication.class)
-public class CreateTaskTest {
+public class SeleniumTests {
 
 	public static WebDriver driver;
 	
@@ -32,9 +34,12 @@ public class CreateTaskTest {
 		driver.manage().window().setSize(new Dimension(1280,720));
 	}
 	
-	public void delayer() {
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-	}
+//	@Test
+//	public void tempElementTest() {
+//		driver.get("http://127.0.0.1:5500/html/task.html");
+//	    String task = driver.findElement(By.xpath("/html/body/div/table/thead/tr[2]/td[2]")).getText();
+//	    System.out.println(task);
+//	}
 	
 	@Test
 	public void createTaskPageTest() {
@@ -46,7 +51,8 @@ public class CreateTaskTest {
 	}
 	
 	@Test
-	public void createTaskTest() {
+	public void createTaskAndUserTest(){
+		WebDriverWait wait = new WebDriverWait(driver,30);
 	    driver.get("http://127.0.0.1:5500/html/index.html");
 	    driver.findElement(By.linkText("User")).click();
 	    driver.findElement(By.linkText("Create")).click();
@@ -55,8 +61,8 @@ public class CreateTaskTest {
 	    driver.findElement(By.id("timezone")).click();
 	    driver.findElement(By.id("timezone")).sendKeys("UTC");
 	    driver.findElement(By.cssSelector(".btn")).click();
-	    delayer();
-	    assertEquals(driver.switchTo().alert().getText(), ("User Successfully Created!"));
+		wait.until(ExpectedConditions.alertIsPresent());
+	    driver.switchTo().alert().accept();
 	    driver.findElement(By.linkText("Task")).click();
 	    driver.findElement(By.linkText("Create")).click();
 	    driver.findElement(By.id("name")).click();
@@ -64,10 +70,14 @@ public class CreateTaskTest {
 	    driver.findElement(By.id("user_id")).click();
 	    driver.findElement(By.id("user_id")).sendKeys("1");
 	    driver.findElement(By.cssSelector(".btn")).click();
-	    delayer();
-	    assertEquals(driver.switchTo().alert().getText(), ("Task Successfully Created!"));
-	    driver.findElement(By.linkText("Task")).click();
-	    driver.findElement(By.linkText("User")).click();
+		wait.until(ExpectedConditions.alertIsPresent());
+	    driver.switchTo().alert().accept();
+	    driver.get("http://127.0.0.1:5500/html/task.html");
+	    String task = driver.findElement(By.xpath("/html/body/div/table/thead/tr[2]/td[2]")).getText();
+	    assertEquals("Take over the world", task);
+	    driver.get("http://127.0.0.1:5500/html/user.html");
+	    String user = driver.findElement(By.xpath("/html/body/div/table/thead/tr[2]/td[2]")).getText();
+	    assertEquals("Pinky", user);
 	}
 	
 	@AfterClass
