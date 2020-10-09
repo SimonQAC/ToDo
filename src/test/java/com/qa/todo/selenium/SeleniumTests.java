@@ -62,93 +62,68 @@ public class SeleniumTests {
 	}
 	
 	@Test
-	public void createTaskAndUserTest(){
-		SpringApplication.run(ToDoApplication.class);
+	public void createUpdateDeleteTaskAndUserTest() {
 		WebDriverWait wait = new WebDriverWait(driver,30);
-	    driver.get("http://127.0.0.1:5500/html/index.html");
-	    driver.findElement(By.linkText("User")).click();
-	    driver.findElement(By.linkText("Create")).click();
-	    driver.findElement(By.id("name")).click();
-	    driver.findElement(By.id("name")).sendKeys("Pinky");
-	    driver.findElement(By.id("timezone")).click();
-	    driver.findElement(By.id("timezone")).sendKeys("UTC");
-	    driver.findElement(By.cssSelector(".btn")).click();
+		SpringApplication.run(ToDoApplication.class);
+		    driver.get("http://127.0.0.1:5500/html/index.html");
+		    driver.findElement(By.linkText("User")).click();
+		    driver.findElement(By.linkText("Create")).click();
+		    driver.findElement(By.id("name")).click();
+		    driver.findElement(By.id("name")).sendKeys("Pinky");
+		    driver.findElement(By.id("timezone")).click();
+		    driver.findElement(By.id("timezone")).sendKeys("UTC");
+		    driver.findElement(By.cssSelector(".btn")).click();
 		wait.until(ExpectedConditions.alertIsPresent());
-	    driver.switchTo().alert().accept();
-	    driver.findElement(By.linkText("Task")).click();
-	    driver.findElement(By.linkText("Create")).click();
-	    driver.findElement(By.id("name")).click();
-	    driver.findElement(By.id("name")).sendKeys("Take over the world");
-	    driver.findElement(By.id("user_id")).click();
-	    driver.findElement(By.id("user_id")).sendKeys("1");
-	    driver.findElement(By.cssSelector(".btn")).click();
+		    driver.switchTo().alert().accept();
+		    driver.findElement(By.linkText("Task")).click();
+		    driver.findElement(By.linkText("Create")).click();
+		    driver.findElement(By.id("name")).click();
+		    driver.findElement(By.id("name")).sendKeys("Take over the world");
+		    driver.findElement(By.id("user_id")).click();
+		    driver.findElement(By.id("user_id")).sendKeys("1");
+		    driver.findElement(By.cssSelector(".btn")).click();
 		wait.until(ExpectedConditions.alertIsPresent());
-	    driver.switchTo().alert().accept();
-	    driver.findElement(By.linkText("Task")).click();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-	    String task = driver.findElement(By.xpath("/html/body/div/table/thead/tr[2]/td[2]")).getText();
-	    driver.findElement(By.linkText("User")).click();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-	    String user = driver.findElement(By.xpath("/html/body/div/table/thead/tr[2]/td[2]")).getText();
-	    System.out.println(task + user);
+		    driver.switchTo().alert().accept();
+		    driver.findElement(By.linkText("Task")).click();
+	        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		    String task = driver.findElement(By.xpath("/html/body/div/table/thead/tr[2]/td[2]")).getText();
+		    driver.findElement(By.linkText("User")).click();
+	        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		    String user = driver.findElement(By.xpath("/html/body/div/table/thead/tr[2]/td[2]")).getText();
+		    System.out.println(task + user);
 	    assertEquals("Pinky", user);
 	    assertEquals("Take over the world", task);
-	}
-	
-	@Test
-	public void updateTaskAndUserTest() {
-		SpringApplication.run(ToDoApplication.class);
-		WebDriverWait wait = new WebDriverWait(driver,30);
-	    driver.get("http://127.0.0.1:5500/html/index.html");
-	    driver.findElement(By.linkText("User")).click();
-	    driver.findElement(By.linkText("Create")).click();
-	    driver.findElement(By.id("name")).click();
-	    driver.findElement(By.id("name")).sendKeys("Pinky");
-	    driver.findElement(By.id("timezone")).click();
-	    driver.findElement(By.id("timezone")).sendKeys("UTC");
-	    driver.findElement(By.cssSelector(".btn")).click();
+		    driver.findElement(By.linkText("Task")).click();
+		    driver.findElement(By.xpath("/html/body/div/table/thead/tr[2]/td[3]/a")).click();
+		    driver.findElement(By.id("name")).click();
+		    driver.findElement(By.id("name")).clear();
+		    driver.findElement(By.id("name")).sendKeys("Take over the world with Pinky");
+		    driver.findElement(By.xpath("/html/body/div/form/button")).click();
 		wait.until(ExpectedConditions.alertIsPresent());
-	    driver.switchTo().alert().accept();
-	    driver.findElement(By.linkText("Task")).click();
-	    driver.findElement(By.linkText("Create")).click();
-	    driver.findElement(By.id("name")).click();
-	    driver.findElement(By.id("name")).sendKeys("Take over the world");
-	    driver.findElement(By.id("user_id")).click();
-	    driver.findElement(By.id("user_id")).sendKeys("1");
-	    driver.findElement(By.cssSelector(".btn")).click();
+		    driver.switchTo().alert().accept();
+		    driver.findElement(By.linkText("User")).click();
+		    driver.findElement(By.xpath("/html/body/div/table/thead/tr[2]/td[5]/a")).click();
+		    driver.findElement(By.id("name")).click();
+		    driver.findElement(By.id("name")).clear();
+		    driver.findElement(By.id("name")).sendKeys("The Brain");
+		    driver.findElement(By.xpath("/html/body/div/form/button")).click();
 		wait.until(ExpectedConditions.alertIsPresent());
-	    driver.switchTo().alert().accept();
-	    driver.findElement(By.linkText("Task")).click();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-	    String task = driver.findElement(By.xpath("/html/body/div/table/thead/tr[2]/td[2]")).getText();
-	    driver.findElement(By.linkText("User")).click();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-	    String user = driver.findElement(By.xpath("/html/body/div/table/thead/tr[2]/td[2]")).getText();
-	    System.out.println(task + user);
-	    assertEquals("Pinky", user);
-	    assertEquals("Take over the world", task);
-	    driver.findElement(By.linkText("Task")).click();
-	    driver.findElement(By.xpath("/html/body/div/table/thead/tr[2]/td[3]/a")).click();
-	    driver.findElement(By.id("name")).click();
-	    driver.findElement(By.id("name")).clear();
-	    driver.findElement(By.id("name")).sendKeys("Take over the world, with Pinky");
-	    driver.findElement(By.xpath("/html/body/div/form/button")).click();
-		wait.until(ExpectedConditions.alertIsPresent());
-	    driver.switchTo().alert().accept();
-	    driver.findElement(By.linkText("User")).click();
-	    driver.findElement(By.xpath("/html/body/div/table/thead/tr[2]/td[5]/a")).click();
-	    driver.findElement(By.id("name")).click();
-	    driver.findElement(By.id("name")).clear();
-	    driver.findElement(By.id("name")).sendKeys("The Brain");
-	    driver.findElement(By.xpath("/html/body/div/form/button")).click();
-		wait.until(ExpectedConditions.alertIsPresent());
-	    driver.switchTo().alert().accept();
-	    driver.findElement(By.linkText("User")).click();
-	    String finaluser = driver.findElement(By.xpath("/html/body/div/table/thead/tr[2]/td[2]")).getText();
-	    String finaltask = driver.findElement(By.xpath("/html/body/div/table/thead/tr[2]/td[4]")).getText();
-	    System.out.println(finaltask + finaluser);
+		    driver.switchTo().alert().accept();
+		    driver.findElement(By.linkText("User")).click();
+		    String finaluser = driver.findElement(By.xpath("/html/body/div/table/thead/tr[2]/td[2]")).getText();
+		    String finaltask = driver.findElement(By.xpath("/html/body/div/table/thead/tr[2]/td[4]")).getText();
+		    System.out.println(finaltask + finaluser);
 	    assertEquals("The Brain", finaluser);
 	    assertEquals("Take over the world with Pinky", finaltask);
+		    driver.findElement(By.linkText("User")).click();
+		    driver.findElement(By.xpath("/html/body/div/table/thead/tr[2]/td[5]/a")).click();
+		    driver.findElement(By.xpath("/html/body/div/button")).click();
+			wait.until(ExpectedConditions.alertIsPresent());
+		    driver.switchTo().alert().accept();
+		    driver.get("http://127.0.0.1:5500/html/userRecord.html?id=1");
+		    String id = driver.findElement(By.xpath("/html/body/div/form/div[1]/input")).getText();
+	    assertEquals("", id);
+	    
 	}
 	
 	@AfterClass
