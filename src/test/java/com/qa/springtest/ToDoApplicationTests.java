@@ -1,4 +1,4 @@
-package com.qa.todo;
+package com.qa.springtest;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
