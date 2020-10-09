@@ -16,6 +16,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.springframework.boot.SpringApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.qa.todo.ToDoApplication;
@@ -36,9 +37,11 @@ public class SeleniumTests {
 	
 //	@Test
 //	public void tempElementTest() {
-//		driver.get("http://127.0.0.1:5500/html/task.html");
+//	    driver.get("http://127.0.0.1:5500/html/task.html");
 //	    String task = driver.findElement(By.xpath("/html/body/div/table/thead/tr[2]/td[2]")).getText();
-//	    System.out.println(task);
+//	    driver.get("http://127.0.0.1:5500/html/user.html");
+//	    String user = driver.findElement(By.xpath("/html/body/div/table/thead/tr[2]/td[2]")).getText();
+//	    System.out.println(task + user);
 //	}
 	
 	@Test
@@ -49,9 +52,18 @@ public class SeleniumTests {
         String title = driver.getTitle();
         assertEquals("ToDo List - Task", title);
 	}
+	@Test
+	public void createUserPageTest() {
+		driver.get("http://127.0.0.1:5500/html/index.html");
+        driver.findElement(By.xpath("/html/body/div/nav/div/div/a[3]")).click();
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        String title = driver.getTitle();
+        assertEquals("ToDo List - User", title);
+	}
 	
 	@Test
 	public void createTaskAndUserTest(){
+		SpringApplication.run(ToDoApplication.class);
 		WebDriverWait wait = new WebDriverWait(driver,30);
 	    driver.get("http://127.0.0.1:5500/html/index.html");
 	    driver.findElement(By.linkText("User")).click();
@@ -73,11 +85,15 @@ public class SeleniumTests {
 		wait.until(ExpectedConditions.alertIsPresent());
 	    driver.switchTo().alert().accept();
 	    driver.get("http://127.0.0.1:5500/html/task.html");
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	    String task = driver.findElement(By.xpath("/html/body/div/table/thead/tr[2]/td[2]")).getText();
-	    assertEquals("Take over the world", task);
 	    driver.get("http://127.0.0.1:5500/html/user.html");
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	    String user = driver.findElement(By.xpath("/html/body/div/table/thead/tr[2]/td[2]")).getText();
+	    System.out.println(task + user);
 	    assertEquals("Pinky", user);
+	    assertEquals("Take over the world", task);
+
 	}
 	
 	@AfterClass
