@@ -30,7 +30,7 @@ public class SeleniumTests {
 	public static void setup() {
         System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
 		ChromeOptions options = new ChromeOptions();
-//		options.setHeadless(true);
+		options.setHeadless(true);
 		driver = new ChromeDriver(options);
 		driver.manage().window().setSize(new Dimension(1280,720));
 	}
@@ -52,6 +52,7 @@ public class SeleniumTests {
         String title = driver.getTitle();
         assertEquals("ToDo List - Task", title);
 	}
+	
 	@Test
 	public void createUserPageTest() {
 		driver.get("http://127.0.0.1:5500/html/index.html");
@@ -59,6 +60,30 @@ public class SeleniumTests {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         String title = driver.getTitle();
         assertEquals("ToDo List - User", title);
+	}
+	
+	@Test
+	public void indexPageTest() {
+		driver.get("http://127.0.0.1:5500/html/index.html");
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        String title = driver.getTitle();
+        assertEquals("ToDo List", title);
+	}
+	
+	@Test
+	public void userPageTest() {
+		driver.get("http://127.0.0.1:5500/html/user.html");
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        String title = driver.getTitle();
+        assertEquals("ToDo List - User", title);
+	}
+	
+	@Test
+	public void taskPageTest() {
+		driver.get("http://127.0.0.1:5500/html/task.html");
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        String title = driver.getTitle();
+        assertEquals("ToDo List - Task", title);
 	}
 	
 	@Test
