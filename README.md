@@ -29,7 +29,7 @@ OS name: "windows 10", version: "10.0", arch: "amd64", family: "windows"
 
 
 
-### Installing the Project back-end in Eclipse
+## Installing the Project back-end in Eclipse
 
 1. Download from Code -> Download as zip from https://github.com/SimonQAC/ToDo
 2. Extract the ToDo-master folder to a location
@@ -43,7 +43,12 @@ OS name: "windows 10", version: "10.0", arch: "amd64", family: "windows"
 2. Navigate to the extracted ToDo-master
 3. Navigate into src/main/java/resources/static
 4. Open Folder
-5. Launch index.html with Liver server
+
+## Accessing the Application
+
+1. Run ToDoApplication.java in Eclipse
+2. Launch index.html in Live Server in Visual Studio Code
+3. In a web browser of your choice navigate to http://localhost:8082
 
 ## Running the tests
 
