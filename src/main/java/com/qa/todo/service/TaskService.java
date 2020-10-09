@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.qa.todo.dto.TaskDTO;
 import com.qa.todo.exception.TaskNotFoundException;
+import com.qa.todo.exception.UserNotFoundException;
 import com.qa.todo.persistence.domain.Task;
 import com.qa.todo.persistence.repo.TaskRepository;
 import com.qa.todo.utils.SpringBeanUtils;
@@ -55,14 +56,20 @@ public class TaskService {
 
 	public TaskDTO update(TaskDTO taskDTO, Long id) {
 		Task toUpdate = this.repo.findById(id).orElseThrow(TaskNotFoundException::new);
+		toUpdate.setTaskName(taskDTO.getName());
 		SpringBeanUtils.mergeObject(taskDTO, toUpdate);
 		return this.mapToDTO(this.repo.save(toUpdate));
 	}
 	
 
-	public boolean delete(Long id) {
+	public Boolean delete(Long id) {
+		if(!this.repo.existsById(id)) {
+			throw new UserNotFoundException();
+		}
 		this.repo.deleteById(id);
-		return this.repo.existsById(id);
+		return !this.repo.existsById(id);
+//		this.repo.deleteById(id);
+//		return this.repo.existsById(id);
 	}
 	
 }

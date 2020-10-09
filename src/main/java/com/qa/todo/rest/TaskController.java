@@ -53,8 +53,9 @@ public class TaskController {
         return ResponseEntity.ok(this.service.read(id));
     }
 	
+    //@Valid maybe put back in
     @PutMapping("/update/{id}")
-    public ResponseEntity<TaskDTO> update(@Valid @PathVariable Long id, @RequestBody TaskDTO taskDTO) {
+    public ResponseEntity<TaskDTO> update(@PathVariable Long id, @RequestBody TaskDTO taskDTO) {
         return new ResponseEntity<>(this.service.update(taskDTO, id), HttpStatus.ACCEPTED);
     }
     

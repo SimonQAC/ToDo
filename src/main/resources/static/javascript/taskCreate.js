@@ -24,7 +24,7 @@ function createTask(name,userid){
       .then(res => res.json())
       .then(function (data) {
         console.log('Request succeeded with JSON response', data);
-        window.alert("User Successfully Created!");
+        window.alert("Task Successfully Created!");
         document.getElementById("form").reset();
       })
       .catch(function (error) {

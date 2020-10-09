@@ -1,6 +1,7 @@
 package com.qa.todo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,7 +20,7 @@ public class UserService {
 
 	private UserRepository repo;
 	private ModelMapper mapper;
-
+	
 	@Autowired
 	public UserService (UserRepository repo, ModelMapper mapper) {
 		super();
@@ -58,9 +59,15 @@ public class UserService {
 		return this.mapToDTO(this.repo.save(toUpdate));
 	}
 	
-	public boolean delete(Long id) {
+	public Boolean delete(Long id) {
+
+		if(!this.repo.existsById(id)) {
+			throw new UserNotFoundException();
+		}
 		this.repo.deleteById(id);
-		return this.repo.existsById(id);
+		return !this.repo.existsById(id);
+//		this.repo.deleteById(id);
+//		return this.repo.existsById(id);
 	}
 	
 }
