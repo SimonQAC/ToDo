@@ -30,7 +30,7 @@ public class SeleniumTests {
 	public static void setup() {
         System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
 		ChromeOptions options = new ChromeOptions();
-		options.setHeadless(true);
+//		options.setHeadless(true);
 		driver = new ChromeDriver(options);
 		driver.manage().window().setSize(new Dimension(1280,720));
 	}
