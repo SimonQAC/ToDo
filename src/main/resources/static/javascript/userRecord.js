@@ -31,7 +31,12 @@ fetch('http://localhost:8082/user/read/'+id)
 }
 
 document.querySelector("form.userRecord").addEventListener("submit",function(stop){
-    stop.preventDefault();
+  stop.preventDefault();
+  let confirm;
+      let r = window.confirm("Are you sure you wish to update User?");
+      if (r == true) {
+      confirm = "You pressed OK!";
+
     let formElements = document.querySelector("form.userRecord").elements;
     // console.log(formElements);
     let id = formElements["id"].value;
@@ -41,11 +46,15 @@ document.querySelector("form.userRecord").addEventListener("submit",function(sto
     console.log(name);
     console.log(timezone);
     updateUser(id,name,timezone);
+      }
+      else {
+        confirm = "You pressed Cancel!"
+      }
 })
 document.getElementById("Delete").addEventListener("click",function(stop){
     stop.preventDefault();
     let confirm;
-        let r = window.confirm("Are you sure you wish to delete record?");
+        let r = window.confirm("Are you sure you wish to delete User?");
         if (r == true) {
         confirm = "You pressed OK!";
 

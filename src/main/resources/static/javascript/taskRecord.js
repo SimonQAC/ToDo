@@ -31,17 +31,24 @@ fetch('http://localhost:8082/task/read/'+id)
 
 document.querySelector("form.taskRecord").addEventListener("submit",function(stop){
     stop.preventDefault();
+    let confirm;
+    let r = window.confirm("Are you sure you wish to update Task?");
+    if (r == true) {
+    confirm = "You pressed OK!";
     let formElements = document.querySelector("form.taskRecord").elements;
     let id = formElements["id"].value;
     let name = formElements["name"].value;
     console.log(id);
     console.log(name);
     updatetask(id,name);
+    } else {
+      confirm = "You pressed cancel!";
+    }
 })
 document.getElementById("Delete").addEventListener("click",function(stop){
     stop.preventDefault();
     let confirm;
-        let r = window.confirm("Are you sure you wish to delete record?");
+        let r = window.confirm("Are you sure you wish to delete Task?");
         if (r == true) {
         confirm = "You pressed OK!";
 
