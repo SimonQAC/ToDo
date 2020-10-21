@@ -6,6 +6,8 @@ JMeter Tests for my ToDo List rest API
 
 ## Notes
 
+**UPDATE:** ToDo List(2).jmx is the current most up to date tests, it still suffers from the backend failing under prolonged load, but has loop controllers and what not
+
 So I had some real trouble getting my tests to function well with logic controllers.
 Within `ToDo List.rar` you'll find my attempts at creating my tests with these.
 I think I also accidentally overwrote a good soak test I created at one point.
