@@ -8,7 +8,7 @@ JMeter Tests for my ToDo List rest API
 
 **UPDATE:** ToDo List.rar contains old versions of the jmx files
 
-You'll find some pretty low error %s in my reports which I'm pretty proud of
+You'll find some pretty low error %s in my reports which I'm pretty proud of, oh and pretty short average response times (<50ms averages sometimes)
 
 So I had some real trouble getting my tests to function well with logic controllers.
 Within `ToDo List.rar` you'll find my attempts at creating my tests without any controllers.
